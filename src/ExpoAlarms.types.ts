@@ -10,20 +10,25 @@ export interface Alarm {
   sound?: AlarmSound;
   snoozeInterval?: number; // minutes, default: 5
   vibrate?: boolean;
+  presentation?: AlarmPresentation; // iOS only - customize alarm UI
 }
 
 // ============================================================================
 // Schedule Types
 // ============================================================================
 
-export type AlarmSchedule = SimpleSchedule | PerDaySchedule;
+export type AlarmSchedule = SimpleSchedule | PerDaySchedule | FixedSchedule;
 
 export interface SimpleSchedule {
   type: 'simple';
   hour: number; // 0-23
   minute: number; // 0-59
-  date?: string; // ISO date string for one-time alarms (e.g., '2026-01-25')
   recurrence?: RecurrenceRule;
+}
+
+export interface FixedSchedule {
+  type: 'fixed';
+  date: string; // Full ISO 8601 datetime string (e.g., '2026-01-25T08:30:00')
 }
 
 export interface PerDaySchedule {
@@ -49,6 +54,39 @@ export interface RecurrenceRule {
 export interface AlarmSound {
   type: 'default' | 'custom';
   uri?: string; // Required when type is 'custom'
+}
+
+// ============================================================================
+// Presentation Types (iOS only)
+// ============================================================================
+
+export interface AlarmButton {
+  text: string;
+  textColor?: string; // Color name: 'blue', 'red', 'green', 'white', 'black', 'gray', 'orange', 'yellow', 'purple', 'pink', 'cyan'
+  systemImageName?: string; // SF Symbol name, e.g., 'stop.circle', 'repeat', 'play.circle'
+}
+
+export interface AlertPresentation {
+  title: string;
+  stopButton?: AlarmButton;
+  secondaryButton?: AlarmButton;
+  secondaryButtonBehavior?: 'countdown' | 'dismiss'; // 'countdown' continues timer, 'dismiss' stops it
+}
+
+export interface CountdownPresentation {
+  title: string;
+}
+
+export interface PausedPresentation {
+  title: string;
+  resumeButton?: AlarmButton;
+}
+
+export interface AlarmPresentation {
+  alert?: AlertPresentation;
+  countdown?: CountdownPresentation;
+  paused?: PausedPresentation;
+  tintColor?: string; // Color name for the overall tint
 }
 
 // ============================================================================

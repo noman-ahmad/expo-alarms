@@ -12,9 +12,21 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      "../app.plugin.js",
+      [
+      "expo-build-properties",
+      {
+        "ios": {
+          "deploymentTarget": "26.0"
+        }
+      }
+      ]
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "expo.modules.alarms.example"
+      "bundleIdentifier": "expo.modules.alarms.example",
+      "appleTeamId": "K6ATTQCYHQ"
     },
     "android": {
       "adaptiveIcon": {
