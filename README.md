@@ -379,7 +379,7 @@ npx expo run:ios
 
 ### "AlarmKit is not available"
 
-Make sure you're running on iOS 18.0 or later. AlarmKit was introduced in iOS 18.
+Make sure you're running on iOS 26.0 or later. AlarmKit was introduced in iOS 26.
 
 ### "Permission denied"
 
