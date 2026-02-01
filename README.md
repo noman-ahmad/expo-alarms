@@ -8,7 +8,7 @@ A native iOS alarm module for Expo/React Native applications using Apple's Alarm
 
 ## Requirements
 
-- **iOS 18.0+** (AlarmKit is only available on iOS 18 and later)
+- **iOS 26.0+** (AlarmKit is only available on iOS 26 and later)
 - **Expo SDK 51+**
 - **Development build** (not compatible with Expo Go)
 
@@ -22,12 +22,27 @@ npx expo install expo-alarms
 
 ### 2. Configure the Expo plugin
 
-Add the plugin to your `app.json` or `app.config.js`:
+- Add the plugin to your `app.json` or `app.config.js`:
+- Add the minimum ios deployment target to ios 26 
+- Important: Add your Dev Team ID 
 
 ```json
 {
   "expo": {
-    "plugins": ["expo-alarms"]
+    "plugins": [
+      "expo-alarms",
+      [
+      "expo-build-properties",
+      {
+        "ios": {
+          "deploymentTarget": "26.0"
+        }
+      }
+      ]
+    ],
+    "ios": {
+      "appleTeamId": "<YOUR_DEV_TEAM_ID"
+    },
   }
 }
 ```
